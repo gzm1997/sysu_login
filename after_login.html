@@ -1,0 +1,431 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+	<title>教务选课</title>	
+	<link rel="stylesheet" type="text/css" href="/elect/static/css/site.css" media="all"> 
+	<link rel="stylesheet" type="text/css" href="/elect/static/css/jquery.loadmask.css" media="all"> 
+	<style type="text/css">
+		#xnd, #xq, #kcmc, #sksjdd, #zjjsxm{
+			width: 75px;
+		}
+		
+		.grid th, .grid th div{	
+			font-size: 0.9em;
+			line-height: 1.2em;
+			padding: 0;
+			margin: 0;
+		}
+		
+		.grid td{
+			font-size: 1.1em;
+		}
+		
+		.grid th{
+			height: 24px !important;	
+			overflow: hidden;
+		}
+		
+		td.s{
+			font-size: 0.9em;
+		}
+	</style>
+</head>
+
+<body>
+	<div id='scrumb'>
+		<a href="types?sid=03c14ce2-a66c-4ae5-a7cb-06ee32980b4d">返回课程类型</a>
+		<input type="hidden" id="milliseconds" value=1496756795698 />
+		系统时间: <label id="sqlCurrentTime"></label>
+		<input type="button" id='logout' value="退出系统" />
+	</div>
+
+	<div class='toolbar'>
+		<h3>学生信息</h3>
+
+		<table class='legend' width: '150px'>
+			<tr class='odd'>
+				<td class='lab'>姓名：</td>
+				<td class='val'>郭柱明</td>
+			
+				<td class='lab'>学号：</td>
+				<td class='val'>15331094</td>
+			</tr>
+		</table>
+	
+		<form id='form' action='courseAll'>
+			<input type="hidden" id="sort" name="sort" value="" />
+			<input type="hidden" id="ord" name="ord" value="" />
+			<input type="hidden" id="sid" name="sid" value="03c14ce2-a66c-4ae5-a7cb-06ee32980b4d" />
+
+			<table style='width:100%; margin-top:15px'>
+				<tr>
+					<td style='padding-left: 9px'>学年度</td>
+					<td>学期</td>
+					<td>培养类别</td>
+					<td>课程名称</td>
+					<td>课程类别</td>
+					<td>选课状态</td>
+					<td>时间地点</td>
+					<td>任课教师</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td style='padding-left: 9px'>
+						<select name="xnd" id="xnd" style="width:90px">
+							<option value=''>全部</option>
+								<option value="2004-2005" >2004-2005</option>
+								<option value="2005-2006" >2005-2006</option>
+								<option value="2006-2007" >2006-2007</option>
+								<option value="2007-2008" >2007-2008</option>
+								<option value="2008-2009" >2008-2009</option>
+								<option value="2009-2010" >2009-2010</option>
+								<option value="2010-2011" >2010-2011</option>
+								<option value="2011-2012" >2011-2012</option>
+								<option value="2012-2013" >2012-2013</option>
+								<option value="2013-2014" >2013-2014</option>
+								<option value="2014-2015" >2014-2015</option>
+								<option value="2015-2016" >2015-2016</option>
+								<option value="2016-2017" selected>2016-2017</option>
+								<option value="2017-2018" >2017-2018</option>
+								<option value="2018-2019" >2018-2019</option>
+						</select>
+					</td>
+					<td>
+						<select name="xq" id="xq">
+							<option value=''>全部</option>
+								<option value="1" >第一学期</option>
+								<option value="2" selected>第二学期</option>
+								<option value="3" >第三学期</option>
+						</select>
+					</td>
+					<td>
+						<select name="pylb" id="pylb">
+							<option value=''>全部</option>
+								<option value="01" >主修</option>
+								<option value="03" >双专业</option>
+								<option value="04" >双学位</option>
+								<option value="02" >辅修</option>
+						</select>
+					</td>
+					<td>
+						<input type="text" name="kcmc" id="kcmc" value="" />
+					</td>
+					<td>
+						<select name="kclb" id="kclb">
+							<option value=''>全部</option>
+								<option value="10" >公必</option>
+								<option value="11" >专必</option>
+								<option value="21" >专选</option>
+								<option value="30" >公选</option>
+								<option value="17" >原公必</option>
+								<option value="18" >原专必</option>
+								<option value="1" >必修</option>
+								<option value="2" >限选</option>
+								<option value="3" >任选</option>
+								<option value="4" >辅修</option>
+								<option value="5" >实践</option>
+								<option value="6" >双必</option>
+								<option value="7" >双选</option>
+								<option value="9" >其他</option>
+						</select>
+					</td>
+					<td>
+						<select name="xkzt" id="xkzt">
+							<option value='' selected>全部</option>
+							<option value='01' >待筛选 </option>
+							<option value='05' >选课成功</option>
+						</select>
+					</td>
+					<td>
+						<input type="text" name="sjdd" id="sjdd" value="" />
+					</td>
+					<td>
+						<input type="text" name="rkjs" id="rkjs" value="" />
+					</td>	
+					<td style='text-align:right; width: 50%; padding-right: 8px'>
+						<input type="submit" value="筛选" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
+	<div id='content'>
+		<h3 style='margin-top:1em'>已选课程(12门，共32学分)； 
+			<label id="toolbarTuitionMessage"></label>
+		</h3>
+		<div class="grid-container">
+			<table class='grid' style='width: 100%;' id='elected'>
+				<thead>
+					<tr>
+						<th><div style='width: 60px'>学年度</div></th>
+						<th><div style='width: 60px'>学期</div></th>
+						<th><div style='width: 50px'>课程号</div></th>
+						<th style='width: 25%'><div style='width: 80px'>课程名称</div></th>
+						<th><div style='width: 80px'>课程类别</div></th>
+						<th><div style='width: 50px'>学分</div></th>
+						<th><div style='width: 80px'>培养类别</div></th>
+						<th style='width: 25%'><div style='width: 80px'>上课时间地点</div></th>
+						<th><div style='width: 50px'>上课校区</div></th>
+						<th><div style='width: 80px'>任课教师</div></th>						
+						<th><div style='width: 80px'>选课状态</div></th>
+						<th><div style='width: 80px'>考核方式</div></th>
+						<th><div style='width: 90px'>成绩记录方式</div></th>
+						<th><div style='width: 90px'>教学班号</div></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="odd" >
+						<td class='c'>2016-2017</td>
+						<td class='c'>第二学期</td>
+						<td class='c'>67000020</td>
+						
+						<td><a href="javascript:void(0)" onclick="courseAllDet('67000020162002', '2016-2017', '2')">3D游戏编程与设计</a></td>
+						
+						<td class='c'>专选</td>
+						<td class='c w'>3</td>
+						<td class='c'>主修</td>
+						<td class='c'>星期二 12-15 节/实验中心B402（1-14 周）</td>	
+						<td class='c'>
+								东
+														</td>
+						<td class='c'>潘茂林</td>
+						<td class='c'>选课成功</td>
+						<td class='c'></td>
+						<td class='c'>百分制</td>
+						<td class='c'>67000020162002</td>
+					</tr>
+					<tr class="even" >
+						<td class='c'>2016-2017</td>
+						<td class='c'>第二学期</td>
+						<td class='c'>62000733</td>
+						
+						<td><a href="javascript:void(0)" onclick="courseAllDet('62000733162001', '2016-2017', '2')">信号与系统</a></td>
+						
+						<td class='c'>专选</td>
+						<td class='c w'>3</td>
+						<td class='c'>主修</td>
+						<td class='c'>星期三 9-11 节/东D301（1-18 周）</td>	
+						<td class='c'>
+								东
+														</td>
+						<td class='c'>郑慧诚</td>
+						<td class='c'>选课成功</td>
+						<td class='c'></td>
+						<td class='c'></td>
+						<td class='c'>62000733162001</td>
+					</tr>
+					<tr class="odd" >
+						<td class='c'>2016-2017</td>
+						<td class='c'>第二学期</td>
+						<td class='c'>62000613</td>
+						
+						<td><a href="javascript:void(0)" onclick="courseAllDet('62000613162001', '2016-2017', '2')">操作系统</a></td>
+						
+						<td class='c'>专必</td>
+						<td class='c w'>3</td>
+						<td class='c'>主修</td>
+						<td class='c'>星期一 3-5 节/东C503（1-18 周）</td>	
+						<td class='c'>
+								东
+														</td>
+						<td class='c'>张永东</td>
+						<td class='c'>选课成功</td>
+						<td class='c'></td>
+						<td class='c'></td>
+						<td class='c'>62000613162001</td>
+					</tr>
+					<tr class="even" >
+						<td class='c'>2016-2017</td>
+						<td class='c'>第二学期</td>
+						<td class='c'>62000319</td>
+						
+						<td><a href="javascript:void(0)" onclick="courseAllDet('62000319162001', '2016-2017', '2')">软件工程实训（中级）</a></td>
+						
+						<td class='c'>专必</td>
+						<td class='c w'>2</td>
+						<td class='c'>主修</td>
+						<td class='c'></td>	
+						<td class='c'>
+								东
+														</td>
+						<td class='c'>骆伟祺,曾坤</td>
+						<td class='c'>选课成功</td>
+						<td class='c'>考查</td>
+						<td class='c'>等级制</td>
+						<td class='c'>62000319162001</td>
+					</tr>
+					<tr class="odd" >
+						<td class='c'>2016-2017</td>
+						<td class='c'>第二学期</td>
+						<td class='c'>62000222</td>
+						
+						<td><a href="javascript:void(0)" onclick="courseAllDet('62000222162001', '2016-2017', '2')">计算机组成原理与接口技术</a></td>
+						
+						<td class='c'>专必</td>
+						<td class='c w'>3</td>
+						<td class='c'>主修</td>
+						<td class='c'>星期四 3-5 节/东D102（1-18 周）</td>	
+						<td class='c'>
+								东
+														</td>
+						<td class='c'>卞静</td>
+						<td class='c'>选课成功</td>
+						<td class='c'></td>
+						<td class='c'></td>
+						<td class='c'>62000222162001</td>
+					</tr>
+					<tr class="even" >
+						<td class='c'>2016-2017</td>
+						<td class='c'>第二学期</td>
+						<td class='c'>62000100</td>
+						
+						<td><a href="javascript:void(0)" onclick="courseAllDet('62000100162001', '2016-2017', '2')">计算机组成原理与接口技术实验</a></td>
+						
+						<td class='c'>专必</td>
+						<td class='c w'>1</td>
+						<td class='c'>主修</td>
+						<td class='c'>星期四 7-9 节/实验中心C102（5-17 周）</td>	
+						<td class='c'>
+								东
+														</td>
+						<td class='c'>卞静</td>
+						<td class='c'>选课成功</td>
+						<td class='c'></td>
+						<td class='c'></td>
+						<td class='c'>62000100162001</td>
+					</tr>
+					<tr class="odd" >
+						<td class='c'>2016-2017</td>
+						<td class='c'>第二学期</td>
+						<td class='c'>62000091</td>
+						
+						<td><a href="javascript:void(0)" onclick="courseAllDet('62000091162001', '2016-2017', '2')">数据库系统</a></td>
+						
+						<td class='c'>专选</td>
+						<td class='c w'>3</td>
+						<td class='c'>主修</td>
+						<td class='c'>星期一 9-11 节/东D401（1-18 周）</td>	
+						<td class='c'>
+								东
+														</td>
+						<td class='c'>阮文江</td>
+						<td class='c'>选课成功</td>
+						<td class='c'></td>
+						<td class='c'></td>
+						<td class='c'>62000091162001</td>
+					</tr>
+					<tr class="even" >
+						<td class='c'>2016-2017</td>
+						<td class='c'>第二学期</td>
+						<td class='c'>16210034</td>
+						
+						<td><a href="javascript:void(0)" onclick="courseAllDet('16210034162021', '2016-2017', '2')">毛泽东思想和中国特色社会主义理论体系概论</a></td>
+						
+						<td class='c'>公必</td>
+						<td class='c w'>6</td>
+						<td class='c'>主修</td>
+						<td class='c'>星期二 7-10 节/东E201（1-20 周）</td>	
+						<td class='c'>
+								东
+														</td>
+						<td class='c'>马爱云</td>
+						<td class='c'>选课成功</td>
+						<td class='c'></td>
+						<td class='c'></td>
+						<td class='c'>16210034162021</td>
+					</tr>
+					<tr class="odd" >
+						<td class='c'>2016-2017</td>
+						<td class='c'>第二学期</td>
+						<td class='c'>24100009</td>
+						
+						<td><a href="javascript:void(0)" onclick="courseAllDet('24100009162002', '2016-2017', '2')">现代生物技术导论（核心通识）</a></td>
+						
+						<td class='c'>公选</td>
+						<td class='c w'>2</td>
+						<td class='c'>主修</td>
+						<td class='c'>星期一 13-15 节/东E201（2-12 周）</td>	
+						<td class='c'>
+								东
+														</td>
+						<td class='c'>丛佩清</td>
+						<td class='c'>选课成功</td>
+						<td class='c'>考查</td>
+						<td class='c'>百分制</td>
+						<td class='c'>24100009162002</td>
+					</tr>
+					<tr class="even" >
+						<td class='c'>2016-2017</td>
+						<td class='c'>第二学期</td>
+						<td class='c'>19000297</td>
+						
+						<td><a href="javascript:void(0)" onclick="courseAllDet('19000297162023', '2016-2017', '2')">高级英语视听说（大学英语）</a></td>
+						
+						<td class='c'>公必</td>
+						<td class='c w'>3</td>
+						<td class='c'>主修</td>
+						<td class='c'>星期二 4-5节/东E403(1-18周)</td>	
+						<td class='c'>
+								东
+														</td>
+						<td class='c'>马远翔</td>
+						<td class='c'>选课成功</td>
+						<td class='c'></td>
+						<td class='c'>百分制</td>
+						<td class='c'>19000297162023</td>
+					</tr>
+					<tr class="odd" >
+						<td class='c'>2016-2017</td>
+						<td class='c'>第二学期</td>
+						<td class='c'>65000114</td>
+						
+						<td><a href="javascript:void(0)" onclick="courseAllDet('65000114162002', '2016-2017', '2')">中华人民共和国对外关系（核心通识）</a></td>
+						
+						<td class='c'>公选</td>
+						<td class='c w'>2</td>
+						<td class='c'>主修</td>
+						<td class='c'>星期三 13-15 节/东B403（2-13 周）</td>	
+						<td class='c'>
+								东
+														</td>
+						<td class='c'>尤洪波</td>
+						<td class='c'>选课成功</td>
+						<td class='c'>笔试</td>
+						<td class='c'>百分制</td>
+						<td class='c'>65000114162002</td>
+					</tr>
+					<tr class="even" >
+						<td class='c'>2016-2017</td>
+						<td class='c'>第二学期</td>
+						<td class='c'>16129032</td>
+						
+						<td><a href="javascript:void(0)" onclick="courseAllDet('16129032162140', '2016-2017', '2')">体育</a></td>
+						
+						<td class='c'>公必</td>
+						<td class='c w'>1</td>
+						<td class='c'>主修</td>
+						<td class='c'>星期三 4-5节(1-18)每周</td>	
+						<td class='c'>
+								东
+														</td>
+						<td class='c'>张淼</td>
+						<td class='c'>选课成功</td>
+						<td class='c'></td>
+						<td class='c'>百分制</td>
+						<td class='c'>16129032162140</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</body>
+<script type="text/javascript" src="/elect/static/js/jquery-1.10.1.min.js"></script> 
+<script type="text/javascript" src="/elect/static/js/jquery.validate.min.js"></script> 
+<script type="text/javascript" src="/elect/static/js/courses.js"></script>
+<script type="text/javascript" src="/elect/static/js/coursesAll.js"></script> 
+<script type="text/javascript" src="/elect/static/js/global.js"></script>
+</html>
