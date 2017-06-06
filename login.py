@@ -50,7 +50,7 @@ s = requests.Session()
 r = s.get(login_url)
 
 #下载验证码
-r = s.get(icode_url, proxies = proxies)
+r = s.get(icode_url)
 content = r.content
 print(content)
 #保存验证码到本地
@@ -76,7 +76,7 @@ data = {
 	"gateway":"true"
 }
 #提交表单登陆
-r = s.post(post_url, data = data, cookies = cookies, proxies = proxies)
+r = s.post(post_url, data = data, cookies = cookies)
 print(r.text)
 
 #获取选课结果的url，这个url每次都不一样，要注意
@@ -84,7 +84,7 @@ bobj = BeautifulSoup(r.text, "html.parser")
 info_url = "http://uems.sysu.edu.cn/elect/s/" + bobj.find("a", {"class": "btn"})["href"]
 
 #获取选课结果页面
-r = s.get(info_url, cookies = cookies, proxies = proxies)
+r = s.get(info_url, cookies = cookies)
 print(r.text)
 
 #把选课结果页面保存到本地
