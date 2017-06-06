@@ -37,13 +37,20 @@ headers = {
 cookies = {
 	"JSESSIONID": "CDCA5110EBCB6C28E87FE71057CE0D21"
 }
+
+#使用代理
+proxies = {
+	"http": "http://127.0.0.1:1080",
+	"https": "http://127.0.0.1:1080"
+}
+
 #创建session对话
 s = requests.Session()
 #对登陆页面发送get请求
 r = s.get(login_url)
 
 #下载验证码
-r = s.get(icode_url)
+r = s.get(icode_url, proxies = proxies)
 content = r.content
 print(content)
 #保存验证码到本地
@@ -56,12 +63,12 @@ jcode = get_icode()
 print(jcode)
 
 #使用encryption模块对密码进行加密
-password = sysu_entryption("#密码#")
+password = sysu_entryption("01254834")
 print(password)
 
 #准备登陆表单
 data = {
-	"username":"#账号#",
+	"username":"15331094",
 	"password":password,
 	"j_code":jcode,
 	"lt":"",
@@ -69,7 +76,7 @@ data = {
 	"gateway":"true"
 }
 #提交表单登陆
-r = s.post(post_url, data = data, cookies = cookies)
+r = s.post(post_url, data = data, cookies = cookies, proxies = proxies)
 print(r.text)
 
 #获取选课结果的url，这个url每次都不一样，要注意
@@ -77,7 +84,7 @@ bobj = BeautifulSoup(r.text, "html.parser")
 info_url = "http://uems.sysu.edu.cn/elect/s/" + bobj.find("a", {"class": "btn"})["href"]
 
 #获取选课结果页面
-r = s.get(info_url, cookies = cookies)
+r = s.get(info_url, cookies = cookies, proxies = proxies)
 print(r.text)
 
 #把选课结果页面保存到本地
