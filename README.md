@@ -14,9 +14,9 @@
 
 
 准备：
-python3
-安装tesseract,本人提供的tesseract百度云下载，亲测版本4比较多坑，这是版本3，已经够用的了
-链接: http://pan.baidu.com/s/1boHp2Jt 密码: 6trj
+ - 安装python3
+ - 安装tesseract,本人提供的tesseract百度云下载，亲测版本4比较多坑，这是版本3，已经够用的了
+ 链接: http://pan.baidu.com/s/1boHp2Jt 密码: 6trj
 
 ----------
 
