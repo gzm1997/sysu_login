@@ -56,12 +56,12 @@ jcode = get_icode()
 print(jcode)
 
 #使用encryption模块对密码进行加密
-password = sysu_entryption("01254834")
+password = sysu_entryption("#密码#")
 print(password)
 
 #准备登陆表单
 data = {
-	"username":"15331094",
+	"username":"#账号#",
 	"password":password,
 	"j_code":jcode,
 	"lt":"",
